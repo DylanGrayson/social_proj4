@@ -1,10 +1,23 @@
 {% extends 'layout.html' %}
-{% block content %}
-    <h1>Create a new account</h1>
 
-    <form action="{% url 'newuser' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_ul }}
-        <input type="submit" value="Register">
-    </form>
+{% block head %}
+    <link rel="stylesheet" href="/static/css/registration.css">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <h1>Create a new account</h1>
+
+        <form action="{% url 'newuser' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Register">
+        </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
 {% endblock %}
