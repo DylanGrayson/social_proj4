@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1>Create a new account</h1>
+
+    <form action="{% url 'newuser' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_ul }}
+        <input type="submit" value="Register">
+    </form>
+{% endblock %}
