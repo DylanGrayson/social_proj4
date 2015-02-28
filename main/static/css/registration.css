@@ -1,8 +1,8 @@
-/*  Custom css for registration page.
-    The navbar blocked the first few lines of content,
-    so this gives some room at the top
-*/
+/*  Custom css for registration page. */
 
+
+/* The navbar blocked the first few lines of content,
+    so this gives some room at the top */
 body {
   padding-top: 60px;
 }
@@ -13,6 +13,8 @@ body {
   }
 }
 
+/* styling the django produced errors. These automatically get name
+    a class of .errorlist, so I had to copy bootstrap style and put it here :/ */
 .errorlist {
   background-color: #f2dede;
   border-color: #ebccd1;
@@ -21,4 +23,33 @@ body {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 0px;
+}
+
+
+/* More django styling woes and copying of bootstrap code for the form fields */
+input[type=text],input[type=password],input[type=email] {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #555;
+    background-color: #FFF;
+    background-image: none;
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
+input:focus {
+    border-color: #66AFE9;
+    outline: 0px none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.075) inset, 0px 0px 8px rgba(102, 175, 233, 0.6);
+}
+
+label {
+    padding-top: 7px;
+    width: 16.6667%;
 }
