@@ -1,0 +1,14 @@
+/*  Custom css for registration page.
+    The navbar blocked the first few lines of content,
+    so this gives some room at the top
+*/
+
+body {
+  padding-top: 60px;
+}
+
+@media (max-width: 979px){
+  body {
+    padding-top: 0px;
+  }
+}
