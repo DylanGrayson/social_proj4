@@ -36,10 +36,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
+                {% if not user.is_authenticated %}
                     <li>
                         <a href="{% url 'main.views.main.home' %}#about">About</a>
                     </li>
-                    {% if not user.is_authenticated %}
                     <li>
                         <a href="{% url 'main.views.login.user_login' %}">Login</a>
                     </li>
@@ -47,6 +47,9 @@
                         <a href="{% url 'main.views.register.new_user' %}">Register</a>
                     </li>
                     {% else %}
+                    <li>
+                        <a href="/user/{{user.pk}}">{{user.username}}</a>
+                    </li> 
                     <li>
                         <a href="{% url 'main.views.login.user_logout' %}">Logout</a>
                     </li>

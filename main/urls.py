@@ -6,6 +6,7 @@ urlpatterns = patterns('',
                        url(r'^register/', 'main.views.register.new_user', name='newuser'),
                        url(r'^login/', 'main.views.login.user_login', name='user_login'),
                        url(r'^logout/', 'main.views.login.user_logout', name='user_logout'),
+                       url(r'^user/(?P<num>\d+)/$', 'main.views.main.profile', name='user'),
                        url(r'^admin/', include(admin.site.urls)),
 
                        )
