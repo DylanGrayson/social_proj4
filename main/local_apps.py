@@ -1,1 +1,2 @@
-LOCAL_APPS = ['main']
+LOCAL_APPS = ['main',
+			'rest_framework']
