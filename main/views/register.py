@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import login, authenticate
 from django import forms
 from django.contrib import messages
 
@@ -22,9 +23,9 @@ def new_user(request):
         if form.is_valid():
             messages.success(request, 'You have been registered')
             new_user = form.save()
-            return HttpResponseRedirect("/register/")
+            return HttpResponseRedirect("/login/")
     elif request.method == 'GET':
         form = NewUserForm()
     else:
         return HttpResponseRedirect('/register/')
-    return render(request, "registration.html", {"form": form })
+    return render(request, "registration.html", {"form": form})
