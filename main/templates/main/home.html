@@ -3,13 +3,25 @@
 {% load staticfiles %}
 
 {% block content %}
-<br><br><br>
 <div class="container">
+<br><br><br>
+
+	{% block search %}
+		<form class="form-horizontal" action="{% url 'main.views.main.search_results' %}" method="post">
+		    <div>
+		    {% csrf_token %}
+		    {{ form }}
+			<button class="btn btn-default" type="submit">
+				<i class="fa fa-search fa-fw"></i>
+				<span class="network-name">Search</span>
+			</button>
+		    </div>
+		</form>
+	{% endblock %}
+
 	<h1>hello {{user.username}} this should be the personal home page for logged in users.</h1>
-</div>
-<div class='container'>
-{% for usr in all_users %}
-	<p><a href="/user/{{usr.pk}}">{{usr.username}}</a></p>
-{% endfor %}
+	{% for usr in all_users %}
+		<p><a href="/user/{{usr.pk}}">{{usr.username}}</a></p>
+	{% endfor %}
 </div>
 {% endblock %}

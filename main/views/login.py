@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django import forms
 from django.contrib import messages
+from django import forms
+
 
 class LoginForm(forms.Form):
 	username = forms.CharField(max_length=30)
