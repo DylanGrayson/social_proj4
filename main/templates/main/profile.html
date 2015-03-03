@@ -5,5 +5,6 @@
 {% block content %}
 <div class="intro-message container">
 	<h1>{{subject.username}}'s personal profile page.</h1>
+    <p><a href="/user/edit/{{ subject.id }}">update</a> account info</p>
 </div>
 {% endblock %}
