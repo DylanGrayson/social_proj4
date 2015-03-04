@@ -46,14 +46,17 @@
                     <li>
                         <a href="{% url 'main.views.register.new_user' %}">Register</a>
                     </li>
-                    {% else %}
+                {% else %}
                     <li>
                         <a href="/user/{{user.pk}}">{{user.username}}</a>
-                    </li> 
+                    </li>
+                    <li>
+                        <a href="/user/edit/{{ user.pk }}">My Account</a>
+                    </li>
                     <li>
                         <a href="{% url 'main.views.login.user_logout' %}">Logout</a>
                     </li>
-                    {% endif %}
+                {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
