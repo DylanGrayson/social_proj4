@@ -7,7 +7,7 @@
 <br><br><br>
 <div class="container">
 	{% block search %}
-		<form class="form-horizontal" action="{% url 'main.views.main.search_results' %}" method="post">
+		<form class="form-horizontal" action="{% url 'main.views.views.search_results' %}" method="post">
 		    <div>
 		    {% csrf_token %}
 		    {{ form }}

@@ -2,8 +2,7 @@ import os
 import re
 import types
 import importlib
-from main.models import Corgi
-from django.contrib.auth.models import User
+import Corgi
 
 model_names = []
 

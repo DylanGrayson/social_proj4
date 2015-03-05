@@ -5,5 +5,9 @@
 {% block content %}
 <div class="intro-message container">
 	<h1>{{subject.username}}'s personal profile page.</h1>
+	{% for corgi in corgis %}
+		<p>{{corgi.name}}</p>
+	{% endfor %}
+
 </div>
 {% endblock %}
