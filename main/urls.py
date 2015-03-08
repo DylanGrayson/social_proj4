@@ -10,5 +10,7 @@ urlpatterns = patterns('',
                        url(r'^search/', 'main.views.views.search_results', name='search_results'),
                        url(r'^user/edit/(?P<num>\d+)/$', 'main.views.edit_user.edit', name='edituser'),
                        url(r'^user/addcorgi/(?P<num>\d+)/$', 'main.views.corgi.add_corgi', name='add_corgi'),
+                       url(r'^user/addpost/(?P<num>\d+)/$', 'main.views.comment.add_comment', name='add_comment'),
+
                        url(r'^admin/', include(admin.site.urls)),
                        )

@@ -3,6 +3,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from main.models.corgi import Corgi
+from main.models.post import Post
+
 from .forms import *
 
 
@@ -16,7 +18,7 @@ def profile(request, num):
 	if request.user.is_authenticated():
 		sub = User.objects.get(pk=num)
 		return render(request, "profile.html", {'subject': sub,
-												'corgis': Corgi.objects.filter(owner = sub)})
+												'corgis': Corgi.objects.filter(owner = sub),'posts': Post.objects.filter(owner = sub)})
 	return render(request, "splash.html", {})
 
 def search_results(request):
