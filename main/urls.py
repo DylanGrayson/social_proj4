@@ -9,5 +9,6 @@ urlpatterns = patterns('',
                        url(r'^user/(?P<num>\d+)/$', 'main.views.views.profile', name='user'),
                        url(r'^search/', 'main.views.views.search_results', name='search_results'),
                        url(r'^user/edit/(?P<num>\d+)/$', 'main.views.edit_user.edit', name='edituser'),
+                       url(r'^user/addcorgi/(?P<num>\d+)/$', 'main.views.corgi.add_corgi', name='add_corgi'),
                        url(r'^admin/', include(admin.site.urls)),
                        )

@@ -8,6 +8,9 @@
 	{% for corgi in corgis %}
 		<p>{{corgi.name}}</p>
 	{% endfor %}
+	<form action="/user/addcorgi/{{ user.pk }}">
+		<input type="submit" value="Add a Corgi">
+	</form>
 
 </div>
 {% endblock %}
