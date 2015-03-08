@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from ..models import Corgi
+from main.models.corgi import Corgi
 from .forms import *
 
 

@@ -2,7 +2,6 @@ import os
 import re
 import types
 import importlib
-import Corgi
 
 model_names = []
 
