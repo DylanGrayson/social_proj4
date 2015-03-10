@@ -9,7 +9,7 @@ from main.models.post import Post
 class AddPostForm(ModelForm):
 	class Meta:
 		model = Post
-		exclude = ('owner',)
+		exclude = ('owner', 'date')
 
 def add_comment(request, num):
 	if request.method == 'POST':
