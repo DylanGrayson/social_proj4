@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from main.models.corgi import Corgi
 from main.models.post import Post
+from main.models.friendship import Friendship
 
 from .forms import *
 
@@ -11,14 +12,19 @@ from .forms import *
 def home(request):
     if request.user.is_authenticated():
     	form = UserSearch()
-        return render(request, "home.html", {'all_users': User.objects.all(), 'form': form})
+    	me = request.user
+    	friends = Friendship.objects.filter(creator=me)
+        return render(request, "home.html", {'all_users': User.objects.all(),
+        									 'form': form,
+        									 'friends': friends})
     return render(request, "splash.html", {})
 
 def profile(request, num):
 	if request.user.is_authenticated():
 		sub = User.objects.get(pk=num)
 		return render(request, "profile.html", {'subject': sub,
-												'corgis': Corgi.objects.filter(owner = sub),'posts': Post.objects.filter(owner = sub)})
+												'corgis': Corgi.objects.filter(owner = sub),
+												'posts': Post.objects.filter(recipient = sub)})
 	return render(request, "splash.html", {})
 
 def search_results(request):

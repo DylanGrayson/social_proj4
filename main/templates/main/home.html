@@ -5,7 +5,7 @@
 {% block content %}
 
 <br><br><br>
-<!--<div class="container">
+<div class="container">
 	{% block search %}
 		<form class="form-horizontal" action="{% url 'main.views.views.search_results' %}" method="post">
 		    <div>
@@ -18,10 +18,5 @@
 		    </div>
 		</form>
 	{% endblock %}
-
-	<h1>hello {{user.username}} this should be the personal home page for logged in users.</h1>
-	{% for usr in all_users %}
-		<p><a href="/user/{{usr.pk}}">{{usr.username}}</a></p>
-	{% endfor %}
-</div>-->
+</div>
 {% endblock %}
