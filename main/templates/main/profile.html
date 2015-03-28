@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div class="col-sm-5">
+<div class="col-sm-8">
     <br>
     <br>
     <h1>{{subject.username}}'s personal profile page..</h1>
@@ -24,9 +24,9 @@
                 {% endif %}</p>
         </div>
     </div>
-</div>
+<!--</div>
 
-<div class="col-sm-7">
+<div class="col-sm-7">-->
     <br>
     <br>
     <h1>{{subject.username}}'s personal comment's page.</h1> 
@@ -63,4 +63,35 @@
     </form>
 </div>
 
+<div class='col-sm-4'>
+    <h3>Recent Posts</h3>
+    <div id='posts'></div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<!--Begin javascript to grab the django api posts-->
+<script type='text/javascript'>
+/*    $.getJSON("http://localhost:8000/api/post/{{user.pk}}", function(result){
+        $.each(result, function(i, field){
+            $("#posts").append(field + " ");
+        });
+    });
+});*/
+    $(document).ready(function (){
+        $.getJSON("{% url 'api_post_list' user.pk %}",
+            function(data){
+                var items = [];
+
+                $.each(data, function(key, val){
+                    items.push("<li><h4>" + val.owner.username + "</h4> said '" + val.title + "'</li>");
+                });
+                $('<ul/>', {
+                    'class': '',
+                    html: items.join('')
+                }).appendTo('#posts');
+            }); 
+    });
+</script>
 {% endblock %}
