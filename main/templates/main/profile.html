@@ -11,8 +11,9 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p>{% for corgi in corgis %}
-                <p>{{corgi.name}}</p>
-                {% endfor %} 
+                <p><img src= "{{ MEDIA_URL}}{{ corgi.image}}" height=42 width=42>
+                 | {{corgi.name}}</p>
+                {% endfor %}
                 {% if subject.pk == user.pk %}
                 <form action="/user/addcorgi/{{ user.pk }}">
                     <input class="btn btn-default btn-lg" type="submit" value="Add a Corgi">
@@ -29,7 +30,7 @@
 <div class="col-sm-7">-->
     <br>
     <br>
-    <h1>{{subject.username}}'s personal comment's page.</h1> 
+    <h1>{{subject.username}}'s personal comment's page.</h1>
     {% for post in posts %}
     <div class="panel panel-default">
 
@@ -57,7 +58,7 @@
 
         </div>
     </div>
-    {% endfor %} 
+    {% endfor %}
     <form action="/user/addpost/{{ subject.pk }}">
         <input class="btn btn-default btn-lg" type="submit" value="Add a comment">
     </form>
@@ -91,7 +92,7 @@
                     'class': '',
                     html: items.join('')
                 }).appendTo('#posts');
-            }); 
+            });
     });
 </script>
 {% endblock %}

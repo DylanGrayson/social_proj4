@@ -16,7 +16,7 @@
         {% endif %}
         <h1>Add a new Corgi</h1>
 
-        <form class="form-horizontal" action="." method="post">
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" >
             <div class="form-group">
             {% csrf_token %}
             {{ form.as_p }}

@@ -15,7 +15,7 @@ class AddCorgiForm(ModelForm):
 
 def add_corgi(request, num):
 	if request.method == 'POST':
-		form = AddCorgiForm(request.POST)
+		form = AddCorgiForm(request.POST, request.FILES)
 		if form.is_valid():
 			messages.success(request, "Your new corgi has been added!")
 			# put the form info in temp variable but don't save to db

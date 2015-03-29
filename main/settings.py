@@ -85,7 +85,7 @@ USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 #for gmail email confirmation
-EMAIL_HOST = EMAIL_HOST 
+EMAIL_HOST = EMAIL_HOST
 EMAIL_PORT = EMAIL_PORT
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
@@ -97,3 +97,8 @@ EMAIL_USE_TLS = EMAIL_USE_TLS
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/static/')]
+
+#used for managing and storing uploaded files
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main/media/')
+MEDIA_URL = '/media/'
