@@ -81,25 +81,40 @@
 {% block javascript %}
 <!--Begin javascript to grab the django api posts-->
 <script type='text/javascript'>
-/*    $.getJSON("http://localhost:8000/api/post/{{user.pk}}", function(result){
-        $.each(result, function(i, field){
-            $("#posts").append(field + " ");
-        });
-    });
-});*/
-    $(document).ready(function (){
-        $.getJSON("{% url 'api_post_list' user.pk %}",
-            function(data){
-                var items = [];
+    var focus;
+    var interval;
 
+    function getPosts(){
+        if (focus) {
+            interval = setInterval(function(){ loadData() }, 3000);
+        } else {
+            clearInterval(interval);
+        }
+    }
+
+    function loadData(){
+        $.getJSON("{% url 'api_post_list' user.pk %}", 
+            function(data) {
+                var items = [];
                 $.each(data, function(key, val){
-                    items.push("<li><h4>" + val.owner.username + "</h4> said '" + val.title + "'</li>");
+                    items.push("<li><h4><a href='/user/" + val.owner.id + "'>" + val.owner.username + "</a></h4> said '" + val.title + "'</li>");
                 });
-                $('<ul/>', {
-                    'class': '',
-                    html: items.join('')
-                }).appendTo('#posts');
-            });
-    });
+                var posts = $('<ul/>', { "class": "", html: items.join('') });
+                $('#posts').html(posts);
+        });
+    }
+
+    $(document).ready(function(){
+        loadData();
+        $(window).focus(function(){
+            focus = true;
+            getPosts();
+        })
+        .blur(function(){
+            focus = false;
+            getPosts();
+        })
+    })
+
 </script>
 {% endblock %}
