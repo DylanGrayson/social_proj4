@@ -16,13 +16,16 @@
                 {% endfor %}
                 {% if subject.pk == user.pk %}
                 <form action="/user/addcorgi/{{ user.pk }}">
-                    <input class="btn btn-default btn-lg" type="submit" value="Add a Corgi">
+                    <input class="btn btn-default btn-lg" type="submit" value="Add a Corgi"></form>
+                <br>
+                <form action="/user/addpost/{{ subject.pk }}">
+                    <input class="btn btn-default btn-lg" type="submit" value="Add a comment">
                 </form>
                 {% else %}
                 <form action="/user/{{ subject.pk }}">
                   <input class="btn btn-default btn-lg" type="submit" value="Send Friend Request">
                 </form>
-                {% endif %}</p>
+                {% endif %}
         </div>
     </div>
 <!--</div>
@@ -35,7 +38,10 @@
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h4><p>{{post.title}}</p></h4>
+            <h4>{{post.title}}
+        {% if post.owner == user %}
+         <a  href="{% url 'link_update' pk=post.pk %}">Edit</a> |   <a href="{% url 'link_delete' pk=post.pk %}">Delete</a></h4>
+        {% endif %}
         </div>
         <div class="panel-body">
             <p>{{post.date}}</p>
@@ -59,12 +65,13 @@
         </div>
     </div>
     {% endfor %}
-    <form action="/user/addpost/{{ subject.pk }}">
-        <input class="btn btn-default btn-lg" type="submit" value="Add a comment">
-    </form>
+
 </div>
 
 <div class='col-sm-4'>
+    <br>
+    <br>
+    <br>
     <h3>Recent Posts</h3>
     <div id='posts'></div>
 </div>

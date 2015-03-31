@@ -6,7 +6,7 @@ from main.models.corgi import Corgi
 from main.models.post import Post
 from main.models.friendship import Friendship
 
-from .forms import *
+from main.views.forms import *
 
 
 def home(request):

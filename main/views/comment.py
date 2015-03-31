@@ -5,6 +5,9 @@ from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from main.models.post import Post
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic.edit import UpdateView
+from django.views.generic.edit import DeleteView
 
 
 class AddPostForm(ModelForm):
@@ -26,4 +29,17 @@ def add_comment(request, num):
 		form = AddPostForm()
 	else:
 		return HttpResponseRedirect('/user/addpost/' + str(num))
-	return render(request, 'add_comment.html', {'form': form})
+	return render(request, 'add_comment.html', {'form': form})\
+
+class LinkForm(ModelForm):
+    class Meta:
+        model = Post
+        exclude = ("owner",)
+
+class LinkUpdateView(UpdateView):
+    model = Post
+    success_url = reverse_lazy("home")
+
+class LinkDeleteView(DeleteView):
+    model = Post
+    success_url = reverse_lazy("home")

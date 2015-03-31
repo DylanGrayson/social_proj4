@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+<p>Are you sure you want to delete "{{ object.title }}"?</p>
+
+<form method="post" action="{% url 'link_delete' pk=object.pk %}">
+  {% csrf_token %}
+  <p><input type="submit" value="Confirm deletion" /></p>
+</form>
+
+{% endblock %}
