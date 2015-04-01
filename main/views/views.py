@@ -24,11 +24,19 @@ def profile(request, num):
 		sub = User.objects.get(pk=num)
 		friend_requests = Friendship.objects.filter(friend = request.user, accepted = False)
 		pending = Friendship.objects.filter(friend = sub, creator=request.user, accepted = False).exists()
+		friend_list = Friendship.objects.filter(friend = request.user, accepted = True)
+		friends = []
+		for i in range(len(friend_list)):
+			friends.append({'friend': friend_list[i].creator, 'since': friend_list[i].created})
+		friend_list = Friendship.objects.filter(creator = request.user, accepted = True)
+		for i in range(len(friend_list)):
+			friends.append(friend_list[i].friend)
 		return render(request, "profile.html", {'subject': sub,
 											'corgis': Corgi.objects.filter(owner = sub),
 											'posts': Post.objects.filter(recipient = sub),
 											'requests': friend_requests,
-											'pending': pending})
+											'pending': pending,
+											'friends': friends})
 	return render(request, "splash.html", {})
 
 def friendrequest(request, num):
@@ -36,11 +44,13 @@ def friendrequest(request, num):
 		if request.method == 'POST':
 			sub = User.objects.get(pk=num)
 			friendship = Friendship(creator=request.user, friend=sub, accepted=False)
-			if not (Friendship.objects.filter(creator=request.user, friend=sub).exists()):
+			if not (Friendship.objects.filter(creator=request.user, friend=sub).exists())\
+				and not (Friendship.objects.filter(friend=request.user, creator=sub).exists()):
 				friendship.save()
 		sub = User.objects.get(pk=num)
 		friend_requests = Friendship.objects.filter(friend = request.user, accepted = False)
 		pending = Friendship.objects.filter(friend = sub, creator=request.user, accepted = False).exists()
+
 		return render(request, "profile.html", {'subject': sub,
 											'corgis': Corgi.objects.filter(owner = sub),
 											'posts': Post.objects.filter(recipient = sub),
@@ -58,5 +68,21 @@ def search_results(request):
 									'form': form})
 	return HttpResponseRedirect('/')
 
+def accept(request, num):
+	if request.user.is_authenticated():
+		req = Friendship.objects.get(id=num)
+		req.accepted = True
+		req.save()
+		return HttpResponseRedirect('/user/' + str(request.user.id))
+	return HttpResponseRedirect('/')
+
+def deny(request, num):
+	if request.user.is_authenticated():
+		Friendship.objects.get(id=num).delete()
+		return HttpResponseRedirect('/user/' + str(request.user.id))
+
+
 def notifications(request):
-	return {'requests': Friendship.objects.filter(friend = request.user, accepted = False)}
+	if request.user.is_authenticated():
+		return {'requests': Friendship.objects.filter(friend = request.user, accepted = False)}
+	return {}

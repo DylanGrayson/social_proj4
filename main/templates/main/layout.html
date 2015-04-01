@@ -59,7 +59,9 @@
                         <ul class="dropdown-menu" role="menu">
                             <li style='background-color:#aaa;'>Friend Requests</li>
                             {% for request in requests %}
-                                <li>{{request.creator.username}} - accept|deny</li>
+                                <li>{{request.creator.username}}
+                                    <a href="/user/accept/{{request.id}}">Accept</a>
+                                    <a href="/user/deny/{{request.id}}">Deny</a></li>
                             {% endfor %}
                         </ul>
                     </li>
