@@ -22,9 +22,29 @@ def home(request):
 def profile(request, num):
 	if request.user.is_authenticated():
 		sub = User.objects.get(pk=num)
+		friend_requests = Friendship.objects.filter(friend = request.user, accepted = False)
+		pending = Friendship.objects.filter(friend = sub, creator=request.user, accepted = False).exists()
 		return render(request, "profile.html", {'subject': sub,
-												'corgis': Corgi.objects.filter(owner = sub),
-												'posts': Post.objects.filter(recipient = sub)})
+											'corgis': Corgi.objects.filter(owner = sub),
+											'posts': Post.objects.filter(recipient = sub),
+											'requests': friend_requests,
+											'pending': pending})
+	return render(request, "splash.html", {})
+
+def friendrequest(request, num):
+	if request.user.is_authenticated():
+		if request.method == 'POST':
+			sub = User.objects.get(pk=num)
+			friendship = Friendship(creator=request.user, friend=sub, accepted=False)
+			if not (Friendship.objects.filter(creator=request.user, friend=sub).exists()):
+				friendship.save()
+		sub = User.objects.get(pk=num)
+		friend_requests = Friendship.objects.filter(friend = request.user, accepted = False)
+		pending = Friendship.objects.filter(friend = sub, creator=request.user, accepted = False).exists()
+		return render(request, "profile.html", {'subject': sub,
+											'corgis': Corgi.objects.filter(owner = sub),
+											'posts': Post.objects.filter(recipient = sub),
+											'pending': pending})
 	return render(request, "splash.html", {})
 
 def search_results(request):
@@ -37,3 +57,6 @@ def search_results(request):
 									'results': User.objects.filter(username__contains=query),
 									'form': form})
 	return HttpResponseRedirect('/')
+
+def notifications(request):
+	return {'requests': Friendship.objects.filter(friend = request.user, accepted = False)}

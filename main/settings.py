@@ -25,6 +25,11 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'main.views.views.notifications',
+    )
+
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'main/templates/main')]
 
 ALLOWED_HOSTS = []
