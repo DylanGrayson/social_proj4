@@ -48,11 +48,13 @@
             function(data) {
                 var items = [];
                 $.each(data, function(key, val){
-                    items.push("<li><h4><a href='/user/" + val.owner.id + "'>" + val.owner.username + "</a></h4> said '" + val.title + "'</li>");
-                    items.reverse();
+                    items.push("<li><h4><a href='/user/" + val.owner.id + "'>" + val.owner.username + "</a></h4> said '" + val.title + "'</li>");  
                 });
+                items.reverse();
                 var posts = $('<ul/>', { "class": "", html: items.join('') });
+
                 $('#posts').html(posts);
+                
         });
     }
 
