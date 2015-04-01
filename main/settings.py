@@ -26,6 +26,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.messages.context_processors.messages',
     'django.contrib.auth.context_processors.auth',
     'main.views.views.notifications',
     )

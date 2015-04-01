@@ -1,6 +1,5 @@
 from rest_framework import status
 from rest_framework.decorators import api_view
-#from rest_framework.response import Response
 from django.http import JsonResponse
 from main.models.post import Post
 from main.models.friendship import Friendship
@@ -16,7 +15,6 @@ Currently, the idea is to only have a sidebar that will update constantly showin
 your friends' comments.
 """
 
-#@api_view(['GET'])
 def post_list(request, num):
 	"""
 	List all of the available comments (for now). Will later only show friends'
