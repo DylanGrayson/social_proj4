@@ -24,18 +24,23 @@ def profile(request, num):
 		sub = User.objects.get(pk=num)
 		friend_requests = Friendship.objects.filter(friend = request.user, accepted = False)
 		pending = Friendship.objects.filter(friend = sub, creator=request.user, accepted = False).exists()
-		friend_list = Friendship.objects.filter(friend = request.user, accepted = True)
+		not_friends = not (Friendship.objects.filter(friend = sub, creator=request.user, accepted = True).exists())\
+			and not (Friendship.objects.filter(creator = sub, friend=request.user, accepted = True).exists())
+
+		friend_list = Friendship.objects.filter(friend = sub, accepted = True)
 		friends = []
 		for i in range(len(friend_list)):
 			friends.append({'friend': friend_list[i].creator, 'since': friend_list[i].created})
-		friend_list = Friendship.objects.filter(creator = request.user, accepted = True)
+		friend_list = Friendship.objects.filter(creator = sub, accepted = True)
 		for i in range(len(friend_list)):
-			friends.append(friend_list[i].friend)
+			friends.append({'friend': friend_list[i].friend, 'since': friend_list[i].created})
+
 		return render(request, "profile.html", {'subject': sub,
 											'corgis': Corgi.objects.filter(owner = sub),
 											'posts': Post.objects.filter(recipient = sub),
 											'requests': friend_requests,
 											'pending': pending,
+											'not_friends': not_friends,
 											'friends': friends})
 	return render(request, "splash.html", {})
 

@@ -27,7 +27,7 @@
                     {% csrf_token %}
                     {% if pending %}
                         <p1>Friend Request Pending</p1>
-                    {% else %}
+                    {% elif not_friends %}
                         <input class="btn btn-default btn-lg" type="submit" value="Send Friend Request">
                     {% endif %}
                 </form>
@@ -81,7 +81,7 @@
     <h3>Friends</h3>
     <ul>
         {% for friend in friends %}
-            <li>{{friend.friend.username}} friends since {{friend.since}}</li>
+            <li><a href='/user/{{friend.friend.id}}'>{{friend.friend.username}}</a> friends since {{friend.since}}</li>
         {% endfor %}
     </ul> 
 </div>
