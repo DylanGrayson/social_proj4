@@ -45,7 +45,6 @@ def post_list(request, num):
 	"""
 	if request.method == 'GET':
 		posts = _get_friend_posts(num)[:5]
-		#posts = Post.objects.all()[:5]
 		serializer = PostSerializer(posts, many=True)
 		return JsonResponse(serializer.data, status=200, safe=False)
 

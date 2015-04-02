@@ -68,18 +68,13 @@
         }
     }
 
-
-    function loadData(){
-        $.getJSON("{% url 'api_post_list' user.pk %}", 
-            function(data) {
-                var items = [];
-                $.each(data, function(key, val){
-
-                    items.push("<li><h4><a href='/user/" + val.owner.id + "'>" + val.owner.username + "</a></h4> said '" + val.title + "'</li>");  
-                });
-                items.reverse();
-                var posts = $('<ul/>', { "class": "", html: items.join('') });
-                $('#posts').html(posts);        
+    function loadData() {
+        $.getJSON("{% url 'api_post_list' user.pk %}", function(json) {
+            console.log(json);
+            var template = $('#template').html();
+            Mustache.parse(template);
+            var rendered = Mustache.render(template, json);
+            $('#posts').html(rendered);
         });
     }
 
@@ -94,18 +89,6 @@
             getPosts();
         })
     });
-
-/*  function loadData(){
-    $.getJSON("{% url 'api_post_list' user.pk %}", 
-        function(data) {
-            var items = [];
-            $.each(data, function(key, val){
-                items.push("<li><h4><a href='/user/" + val.owner.id + "'>" + val.owner.username + "</a></h4> said '" + val.title + "'</li>");
-            });
-            var posts = $('<ul/>', { "class": "", html: items.join('') });
-            $('#posts').html(posts);
-    });
-}*/
 
 </script>
 {% endblock %}
