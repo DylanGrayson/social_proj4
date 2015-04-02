@@ -27,6 +27,7 @@ def add_comment(request, num):
 			return HttpResponseRedirect('/user/addpost/' + str(num))
 	elif request.method == 'GET':
 		form = AddPostForm()
+
 	else:
 		return HttpResponseRedirect('/user/addpost/' + str(num))
 	return render(request, 'add_comment.html', {'form': form})\
