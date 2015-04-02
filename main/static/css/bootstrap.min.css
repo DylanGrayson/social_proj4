@@ -6731,3 +6731,7 @@ button.close {
         display: none!important
     }
 }
+
+.right_anch{
+    float:right; display:inline-block;
+}
