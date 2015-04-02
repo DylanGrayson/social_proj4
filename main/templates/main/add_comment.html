@@ -14,9 +14,9 @@
                 {% endfor %}
             </div>
         {% endif %}
-        <h1>Add a new cooment</h1>
+        <h1>Add a new comment</h1>
 
-        <form class="form-horizontal" action="." method="post">
+        <form class="form-horizontal" action="#" method="post">
             <div class="form-group">
             {% csrf_token %}
             {{ form.as_p }}
