@@ -18,13 +18,38 @@
 		    </div>
 		</form>
 	{% endblock %}
-	<div class='col-sm-4'>
-    <br>
-    <br>
-    <br>
-    <h3>Recent Posts</h3>
+
+    <!--======================================================================-->
+    <!-- Begin Mustache Template. Verbatim tells django to ignore this so the Mustache.js delimiters can work -->
+    {% verbatim %}
+    <script id='template' type='x-tmpl-mustache'>  
+        <div class='col-md-6'>
+            <br>
+            <br>
+            <h3>Recent Posts</h3>
+            
+                {{#.}}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">By <a href='/user/{{#owner}}{{id}}'>{{username}}</a>{{/owner}}
+                    @<a href='/user/{{#recipient}}{{id}}'>{{username}}</a>{{/recipient}}</h4>
+                  </div>
+                  <div class="panel-body">
+                        <b>{{ title }}</b><br>
+                        "{{ body }}"<br>
+                        <hr>
+                        Posted: {{ date }}
+                  </div>
+                </div>
+                {{/.}}
+            
+        </div>
+    </script>
+
+    {% endverbatim %}
+    <!-- end mustache template -->
+    <!--======================================================================-->
     <div id='posts'></div>
-</div>
 </div>
 
 {% endblock %}
@@ -43,15 +68,13 @@
         }
     }
 
-    function loadData(){
-        $.getJSON("{% url 'api_post_list' user.pk %}", 
-            function(data) {
-                var items = [];
-                $.each(data, function(key, val){
-                    items.push("<li><h4><a href='/user/" + val.owner.id + "'>" + val.owner.username + "</a></h4> said '" + val.title + "'</li>");
-                });
-                var posts = $('<ul/>', { "class": "", html: items.join('') });
-                $('#posts').html(posts);
+    function loadData() {
+        $.getJSON("{% url 'api_post_list' user.pk %}", function(json) {
+            console.log(json);
+            var template = $('#template').html();
+            Mustache.parse(template);
+            var rendered = Mustache.render(template, json);
+            $('#posts').html(rendered);
         });
     }
 
@@ -65,7 +88,19 @@
             focus = false;
             getPosts();
         })
-    })
+    });
+
+/*  function loadData(){
+    $.getJSON("{% url 'api_post_list' user.pk %}", 
+        function(data) {
+            var items = [];
+            $.each(data, function(key, val){
+                items.push("<li><h4><a href='/user/" + val.owner.id + "'>" + val.owner.username + "</a></h4> said '" + val.title + "'</li>");
+            });
+            var posts = $('<ul/>', { "class": "", html: items.join('') });
+            $('#posts').html(posts);
+    });
+}*/
 
 </script>
 {% endblock %}

@@ -32,7 +32,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     )
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'main/templates/main')]
-
 ALLOWED_HOSTS = []
 
 
@@ -102,7 +101,8 @@ EMAIL_USE_TLS = EMAIL_USE_TLS
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/static/')]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main/static/'),
+                    os.path.join(BASE_DIR, 'main/static/templates/mustache')]
 
 #used for managing and storing uploaded files
 

@@ -12,9 +12,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class PostSerializer(serializers.ModelSerializer):
 	owner = UserSerializer(read_only=True)
+	recipient = UserSerializer(read_only=True)
+	date = serializers.DateTimeField(format="%A, %b %d %Y at %I:%M%p")
+
 	class Meta:
 		model = Post
-		fields = ('title', 'body', 'date', 'owner')
+		fields = ('title', 'body', 'date', 'owner', 'recipient')
 
 
 class FriendshipSerializer(serializers.ModelSerializer):

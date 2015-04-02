@@ -8,8 +8,7 @@ class Post(models.Model):
     date = models.DateTimeField(auto_now=True, auto_now_add=True)
     owner = models.ForeignKey(User, related_name="author_set")
     recipient = models.ForeignKey(User, related_name="recipient_set")
-
-
+    
 
     def __unicode__(self):
         return self.title

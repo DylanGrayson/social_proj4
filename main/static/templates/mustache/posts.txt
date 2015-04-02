@@ -1,0 +1,14 @@
+<div class='col-sm-4'>
+    <br>
+    <br>
+    <br>
+    <h3>Recent Posts</h3>
+    
+        {{#.}}
+        <h4>{{ title }}</h4>
+        <ul>
+            <li>Posted  on {{ date }} by {{ #owner }} {{ username }} {{ /owner }} </li>
+        </ul>
+        {{/.}}
+    
+</div>
