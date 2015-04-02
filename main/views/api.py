@@ -34,7 +34,7 @@ def _get_friend_posts(num):
 	have made
 	"""
 	friends = _get_friend_list(num)
-	posts = Post.objects.filter(owner__in=friends)
+	posts = Post.objects.filter(owner__in=friends).order_by('-date')
 	return posts
 
 
