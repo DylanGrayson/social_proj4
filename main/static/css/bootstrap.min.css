@@ -1122,7 +1122,7 @@ input,button,select,textarea {
 }
 
 a {
-    color: #23527c;
+    color: #23527C;
     text-decoration: none
 }
 
@@ -1204,7 +1204,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
     font-family: inherit;
     font-weight: 500;
     line-height: 1.1;
-    color: inherit
+    color: #23527
 }
 
 h1 small,h2 small,h3 small,h4 small,h5 small,h6 small,.h1 small,.h2 small,.h3 small,.h4 small,.h5 small,.h6 small,h1 .small,h2 .small,h3 .small,h4 .small,h5 .small,h6 .small,.h1 .small,.h2 .small,.h3 .small,.h4 .small,.h5 .small,.h6 .small {
@@ -1225,6 +1225,7 @@ h1 small,.h1 small,h2 small,.h2 small,h3 small,.h3 small,h1 .small,.h1 .small,h2
 h4,.h4,h5,.h5,h6,.h6 {
     margin-top: 10px;
     margin-bottom: 10px
+    color: #23527
 }
 
 h4 small,.h4 small,h5 small,.h5 small,h6 small,.h6 small,h4 .small,.h4 .small,h5 .small,.h5 .small,h6 .small,.h6 .small {
@@ -1244,6 +1245,7 @@ h3,.h3 {
 
 h4,.h4 {
     font-size: 18px
+    color:#23527
 }
 
 h5,.h5 {
@@ -5423,7 +5425,8 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
     padding: 10px 15px;
     border-bottom: 1px solid transparent;
     border-top-left-radius: 3px;
-    border-top-right-radius: 3px
+    border-top-right-radius: 3px;
+    color:#23527
 }
 
 .panel-heading>.dropdown .dropdown-toggle {
@@ -5571,6 +5574,7 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
 
 .panel-group .panel-heading {
     border-bottom: 0
+    color: #23527C
 }
 
 .panel-group .panel-heading+.panel-collapse>.panel-body,.panel-group .panel-heading+.panel-collapse>.list-group {
@@ -5590,9 +5594,10 @@ a.list-group-item-danger.active,a.list-group-item-danger.active:hover,a.list-gro
 }
 
 .panel-default>.panel-heading {
-    color: aliceblue;
-    background-color: #3B5999;
-    border-color: #ddd
+    color: darkblue;
+    background-color: #F8F8F8;
+    border-color: #840AE5;
+    font-style: bold;
 }
 
 .panel-default>.panel-heading+.panel-collapse>.panel-body {
@@ -6734,4 +6739,5 @@ button.close {
 
 .right_anch{
     float:right; display:inline-block;
+    /* color: beige; */
 }
