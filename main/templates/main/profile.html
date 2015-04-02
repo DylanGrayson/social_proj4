@@ -16,7 +16,7 @@
                 {% endfor %}
                 {% if subject.pk == user.pk %}
                 <form action="/user/addcorgi/{{ user.pk }}">
-                    <input class="btn btn-default btn-lg" type="submit" value="Add a Corgi"></form>
+                    <input class="btn btn-default btn-lg" type="submit" value="Add a corgi image"></form>
                 <br>
                 <form action="/user/addpost/{{ subject.pk }}">
                     <input class="btn btn-default btn-lg" type="submit" value="Add a comment">
@@ -40,7 +40,7 @@
     <br>
     <br>
     <h1>{{subject.username}}'s personal comment's page.</h1>
-    {% for post in posts %}
+    {% for post in posts reversed %}
     <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -52,7 +52,7 @@
         <div class="panel-body">
             <p>{{post.date}}</p>
             <a href="/user/{{post.owner.id}}">
-                <p>{{post.owner.username}}
+                <p>From: {{post.owner.username}}
             </a>
             <p>
                 <p>{{post.body}}</p>
