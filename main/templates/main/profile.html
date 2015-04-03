@@ -95,15 +95,13 @@
   <!-- end comments -->
   <!-- friends area -->
   <div class='col-sm-2'>
-    <br>
-    <br>
     <h1>Friends</h1>
    <div class="panel panel-default">
       <div class="panel-body">
-      <ul>
+      <ul class="list-group">
           {% if friends %}
             {% for friend in friends %}
-                  <li><a href='/user/{{friend.friend.id}}'>{{friend.friend.username}}</a> friends since {{friend.since}}</li>
+                  <li class="list-group-item"><a href='/user/{{friend.friend.id}}'>{{friend.friend.username}}</a> friends since {{friend.since}}</li>
               {% endfor %}
           {% else %}
             No friends.  None.  Not a single one.
