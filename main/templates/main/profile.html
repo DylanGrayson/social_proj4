@@ -86,7 +86,7 @@
    <div class="panel panel-default">
       <div class="panel-body">
       <ul>
-          {% if friends.exists %}
+          {% if friends %}
             {% for friend in friends %}
                   <li><a href='/user/{{friend.friend.id}}'>{{friend.friend.username}}</a> friends since {{friend.since}}</li>
               {% endfor %}
