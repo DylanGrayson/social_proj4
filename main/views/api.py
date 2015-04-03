@@ -1,10 +1,13 @@
+from datetime import datetime
 from rest_framework import status
 from rest_framework.decorators import api_view
 from django.http import JsonResponse
 from main.models.post import Post
 from main.models.friendship import Friendship
 from django.contrib.auth.models import User
+from main.models import Corgi
 from main.serializers import PostSerializer, FriendshipSerializer
+from django.contrib.sessions.models import Session
 
 """
 This file holds the special views that will act as the api for this site
@@ -14,6 +17,7 @@ using javascript remote calls. In essence the website will access itself.
 Currently, the idea is to only have a sidebar that will update constantly showing
 your friends' comments.
 """
+
 def _get_friend_list(num):
 	"""
 	Use the current logged in user to search for their friends in the Friendship model.
@@ -27,6 +31,7 @@ def _get_friend_list(num):
 	for friendship in friendships:
 		friends.append(friendship.friend)
 	return friends
+
 
 def _get_friend_posts(num):
 	"""
@@ -50,3 +55,21 @@ def post_list(request, num):
 
 	else:
 		return JsonResponse({}, status=404)
+
+
+def site_stats(request):
+	"""
+	Give total numbers on various statistics on the site
+	"""
+	if request.method == 'GET':
+		data = {
+			'total_users': User.objects.all().count(),
+			'total_friendships': Friendship.objects.all().count(),
+			'pending_friendships': Friendship.objects.filter(accepted=False).count(),
+			'total_corgis': Corgi.objects.all().count()
+		}
+
+		return JsonResponse(data)
+	else:
+		return JsonResponse({}, status=404)
+		

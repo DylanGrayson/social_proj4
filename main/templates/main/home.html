@@ -10,7 +10,7 @@
     <!--======================================================================-->
     <!-- Begin Mustache Template. Verbatim tells django to ignore this so the Mustache.js delimiters can work -->
     {% verbatim %}
-    <script id='template' type='x-tmpl-mustache'>  
+    <script id='posts_template' type='x-tmpl-mustache'>  
         <div class='col-md-6'>
             <br>
             <br>
@@ -34,10 +34,41 @@
         </div>
     </script>
 
+    <script id='stats_template' type='x-tmpl-mustache'>  
+        <div class='col-md-6'>
+            <br>
+            <br>
+            <h3>Statistics</h3>
+            
+                {{#.}}
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading" style="display: inline;">Total Users</h4>
+                     <p style="font-size:24px; display: inline; padding-left:275px;">{{ total_users }}</p>
+                  </li>
+                  <li class="list-group-item">
+                     <h4 class="list-group-item-heading" style="display: inline;">Total Corgis</h4> 
+                     <p style="font-size:24px; display: inline; padding-left:270px;">{{ total_corgis }}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading" style="display: inline;">Total Friendships</h4>
+                    <p style="font-size:24px; display: inline; padding-left:230px;">{{total_friendships}}</p>
+                  </li>
+                  <li class="list-group-item">
+                    <h4 class="list-group-item-heading" style="display: inline;">Pending Friendships</h4>
+                    <p style="font-size:24px; display: inline; padding-left:220px;">{{pending_friendships}}</p>
+                  </li>
+                </ul>
+                {{/.}}
+            
+        </div>
+    </script>
+
     {% endverbatim %}
     <!-- end mustache template -->
     <!--======================================================================-->
     <div id='posts'></div>
+    <div id='stats'></div>
 </div>
 
 {% endblock %}
@@ -50,19 +81,29 @@
 
     function getPosts(){
         if (focus) {
-            interval = setInterval(function(){ loadData() }, 3000);
+            interval = setInterval(function(){ loadData() }, 1000);
         } else {
             clearInterval(interval);
         }
     }
 
     function loadData() {
+        // get recent posts
         $.getJSON("{% url 'api_post_list' user.pk %}", function(json) {
             console.log(json);
-            var template = $('#template').html();
+            var template = $('#posts_template').html();
             Mustache.parse(template);
             var rendered = Mustache.render(template, json);
             $('#posts').html(rendered);
+        });
+
+        // get site stats
+        $.getJSON("{% url 'api_site_stats' %}", function(json) {
+            console.log(json);
+            var template = $('#stats_template').html();
+            Mustache.parse(template);
+            var rendered = Mustache.render(template, json);
+            $('#stats').html(rendered);
         });
     }
 
