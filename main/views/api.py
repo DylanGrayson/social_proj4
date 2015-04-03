@@ -30,6 +30,9 @@ def _get_friend_list(num):
 	friends = [current_user] # include the current user -- we want their posts to show up too
 	for friendship in friendships:
 		friends.append(friendship.friend)
+	friendships = Friendship.objects.filter(friend=current_user, accepted=True)
+	for friendship in friendships:
+		friends.append(friendship.friend)
 	return friends
 
 
