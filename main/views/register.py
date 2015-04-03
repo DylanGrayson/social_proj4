@@ -22,8 +22,14 @@ def new_user(request):
     if request.method == 'POST':
         form = NewUserForm(request.POST)
         if form.is_valid():
+
+
+            new_user = form.save()
+            email = new_user.email
+            username = new_user.username
+
             messages.success(request, 'You have been registered')
-            send_mail('Welcome to CorgiBook', 'Hello and welcome to CorgiBook! [test2 registration email confirmation, forgot to include Michael]', settings.EMAIL_HOST_USER, ['lf237@nau.edu', 'mkg52@nauedu', 'amm752@nau.edu', 'sk367@nau.edu', 'drg86@nau.edu'], fail_silently=False)
+            send_mail('Welcome to CorgiBook', 'Hello %s and welcome to CorgiBook! ' %(username) , settings.EMAIL_HOST_USER, [email], fail_silently=False)
             new_user = form.save()
             return HttpResponseRedirect("/login/")
     elif request.method == 'GET':
