@@ -75,7 +75,7 @@
                     {{ requests|length }} {% endif %}Notifications<span class="caret"></span></a>
                
                         <ul class="dropdown-menu" role="menu">
-                            <li style='background-color:#aaa;'>Friend Requests</li>
+                            <li style='background-color:#eee;'>Friend Requests</li>
                             {% for request in requests %}
                                 <li>{{request.creator.username}}
                                     <a href="/user/accept/{{request.id}}">Accept</a>
