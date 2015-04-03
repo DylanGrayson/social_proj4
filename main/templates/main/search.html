@@ -4,23 +4,8 @@
 
 {% block content %}
 
-<br><br><br>
+
 <div class='container'>
-	{% block search %}
-	<div class="container">
-		<form class="form-horizontal" action="{% url 'main.views.views.search_results' %}" method="post">
-		    <div>
-		    {% csrf_token %}
-		    {{ form }}
-			<button class="btn btn-default" type="submit">
-				<i class="fa fa-search fa-fw"></i>
-				<span class="network-name">Search</span>
-			</button>
-		    </div>
-		</form>
-	</div>
-	<br>
-	{% endblock %}
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3 class="panel-title">Search Results</h3>

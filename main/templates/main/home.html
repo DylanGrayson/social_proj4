@@ -4,20 +4,8 @@
 
 {% block content %}
 
-<br><br><br>
+
 <div class="container">
-	{% block search %}
-		<form class="form-horizontal" action="{% url 'main.views.views.search_results' %}" method="post">
-		    <div>
-		    {% csrf_token %}
-		    {{ form }}
-			<button class="btn btn-default" type="submit">
-				<i class="fa fa-search fa-fw"></i>
-				<span class="network-name">Search</span>
-			</button>
-		    </div>
-		</form>
-	{% endblock %}
 
     <!--======================================================================-->
     <!-- Begin Mustache Template. Verbatim tells django to ignore this so the Mustache.js delimiters can work -->

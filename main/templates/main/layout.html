@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.css' %}">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
     </lihk>
+    <link rel="stylesheet" href="/static/css/registration.css">
 
     <!-- Mustache Templating framework for Javascript -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.8.1/mustache.min.js"></script>
@@ -41,6 +42,20 @@
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                {% block search %}
+                    <div>
+                    <form class="navbar-form navbar-left" action="{% url 'main.views.views.search_results' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                        {{ search }}
+                        </div>
+                        <button class=" btn btn-default btn-sm" type="submit">
+                            <i class="fa fa-search fa-fw"></i>
+                            <span class="network-name"></span>
+                        </button>
+                    </form>
+                {% endblock %}
+            
 
                 <ul class="nav navbar-nav navbar-right">
                 {% if not user.is_authenticated %}

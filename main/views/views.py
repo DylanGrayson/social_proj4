@@ -11,11 +11,9 @@ from main.views.forms import *
 
 def home(request):
     if request.user.is_authenticated():
-    	form = UserSearch()
     	me = request.user
     	friends = Friendship.objects.filter(creator=me)
         return render(request, "home.html", {'all_users': User.objects.all(),
-        									 'form': form,
         									 'friends': friends})
     return render(request, "splash.html", {})
 
@@ -89,5 +87,7 @@ def deny(request, num):
 
 def notifications(request):
 	if request.user.is_authenticated():
-		return {'requests': Friendship.objects.filter(friend = request.user, accepted = False)}
+		form = UserSearch()
+		return {'requests': Friendship.objects.filter(friend = request.user, accepted = False),
+				'search': form}
 	return {}
