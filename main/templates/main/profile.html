@@ -7,11 +7,12 @@
 <div class="" style="background: url(/static/img/intro-bg.jpg) center; color: #fff; height: 200px;">
   <div class="col-sm-1"></div>
   <div style="padding-top:65px;" class="col-sm-2">
-      {% if friends and subject.pk != user.pk %}
-        <p1>You are friends</p1>
-      {% elif pending %}
+      {% if pending %}
         <p1 class="text-success">Friend Request Pending</p1>
-      {% elif not friends %}
+      {% elif not not_friends and subject.pk != user.pk %}
+        <p1>You are friends</p1>
+
+      {% elif not_friends and subject.pk != user.pk  %}
         <form action = "/user/{{ subject.pk }}/friendrequest" method="POST">
           {% csrf_token %}
           <input class="btn btn-default btn-md" type="submit" value="Send Friend Request">
@@ -53,7 +54,7 @@
   <div class="col-sm-6">
       <h1>Comments</h1>
       {% if not posts %}
-        <p><i>No comments yet...<i></p>
+        <p><i>No comments yet...</i></p>
       {% endif %}
       {% for post in posts reversed %}
       <div class="panel panel-default">
@@ -88,8 +89,6 @@
   <!-- friends area -->
   <div class='col-sm-2'>
     <h1>Friends</h1>
-   <div class="panel panel-default">
-      <div class="panel-body">
       <ul class="list-group">
           {% if friends %}
             {% for friend in friends %}
@@ -99,8 +98,6 @@
             No friends.  None.  Not a single one.
           {% endif %}
       </ul>
-      </div>
-      </div>
   </div>
   <!-- end friends area -->
 </div>
