@@ -3,48 +3,63 @@
 {% load staticfiles %}
 
 {% block content %}
+<!-- friend requesting button/status -->
 <div class="row" >
-  <h1 style="padding-top:50px; text-align:center">{{subject.username}}'s Profile</h1>
+  <div class="col-sm-1"></div>
+  <div style="padding-top:65px;" class="col-sm-2">
+      {% if friends and subject.pk != user.pk %}
+        <p1>You are friends</p1>
+      {% elif pending %}
+        <p1 class="text-success">Friend Request Pending</p1>
+      {% elif not friends %}
+        <form action = "/user/{{ subject.pk }}/friendrequest" method="POST">
+          {% csrf_token %}
+          <input class="btn btn-default btn-md" type="submit" value="Send Friend Request">
+        </form>
+      {% endif %}
+  </div>
+  <!-- end friend requesting status -->
+  <!-- Page heading -->
+  <div class="col-sm-6">
+    <h1 class="" style="padding-top:50px; text-align:center; font-size:40px;">{{subject.username}}'s Profile</h1>
+  </div>
 </div>
 
+<!-- Left pane/ "pack" area -->
 <br>
 <div class="row">
   <div class = "col-sm-1"></div>
   <div class="col-sm-2">
+    <br>
+    <br>
+    <h1>{{subject.username}}'s pack</h1>
+    <div class="panel panel-default">
+          <div class="panel-body">
+              {% if not corgis %}
+                <p>Completely packless. What a shame!</p>
+              {% endif %}
+              {% for corgi in corgis %}
+                <p><img src= "{{ MEDIA_URL}}{{ corgi.image}}" height=42 width=42 >
+                 | {{corgi.name}}</p>
+              {% endfor %}
 
-      <br>
-      <br>
-      <h1>{{subject.username}}'s pack</h1>
-      <div class="panel panel-default">
-             <div class="panel-body">
-              <p>{% for corgi in corgis %}
-                  <p><img src= "{{ MEDIA_URL}}{{ corgi.image}}" height=42 width=42 >
-                   | {{corgi.name}}</p>
-                  {% endfor %}
-                  {% if subject.pk == user.pk %}
+              {% if subject.pk == user.pk %}
                   <form action="/user/addcorgi/{{ user.pk }}">
-                      <input class="btn btn-default btn-lg" type="submit" value="Add a corgi"></form>
-                  {% else %}
-  
-                  <form action="/user/{{ subject.pk }}/friendrequest" method="POST">
-                      {% csrf_token %}
-                      {% if pending %}
-                          <p1>Friend Request Pending</p1>
-                      {% elif not_friends %}
-                          <input class="btn btn-default btn-md" type="submit" value="Send Friend Request">
-                      {% elif friends %}
-                          <a class="btn btn-default btn-md" href = "/user/addpost/{{ subject.pk }}" />Add a comment</a>
-                      {% endif %}
+                    <input class="btn btn-default btn-lg" type="submit" value="Add a corgi">
                   </form>
-                  {% endif %}
+              {% endif %}
           </div>
       </div>
   </div>
-  
+  <!-- end "pack" area -->
+  <!-- Comments section -->
   <div class="col-sm-6">
       <br>
       <br>
-      <h1>{{subject.username}}'s personal comment's page.</h1>
+      <h1>Comments</h1>
+      {% if not posts %}
+        <p><i>No comments yet...<i></p>
+      {% endif %}
       {% for post in posts reversed %}
       <div class="panel panel-default">
   
@@ -72,13 +87,18 @@
                       <input type="text" class="form-control" placeholder="Add a comment..">
                   </div>
               </form>
-  
           </div>
       </div>
       {% endfor %}
-  
-  </div>
 
+      {% if friends %}
+      <form action="/user/addpost/{{ subject.pk }}">
+        <input class="btn btn-default btn-lg" type="submit" value="Add a comment">
+      </form>
+      {% endif %}
+  </div>
+  <!-- end comments -->
+  <!-- friends area -->
   <div class='col-sm-2'>
     <br>
     <br>
@@ -97,5 +117,6 @@
       </div>
       </div>
   </div>
+  <!-- end friends area -->
 </div>
 {% endblock %}
